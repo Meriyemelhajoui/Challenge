@@ -906,13 +906,13 @@ function startScan(value) {
 
 
 
-
 function showFinalResult(value) {
     let message = '';
+    let bg = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'; // default
 
     if (value >= 100) {
         message = '100%?!?? 🚨 OBSESSION DETECTED 🚨 Sir this is no longer missing me, this is emotional dependency. I approve. I miss you more tho 😌💕';
-        document.body.style.background = 'linear-gradient(135deg, #ff1493 0%, #ff69b4 100%)';
+        bg = 'linear-gradient(135deg, #ff1493 0%, #ff69b4 100%)';
     } else if (value >= 98) {
         message = '98%?? Why not 100?? WHO IS STEALING THE 2%?? 👀 Explain yourself immediately.';
     } else if (value >= 95) {
@@ -931,23 +931,31 @@ function showFinalResult(value) {
         message = '30%?? Oh so we’re joking today. Restart the game. Immediately.';
     } else {
         message = '🚨 CRITICAL ERROR 🚨 Loyalty levels dangerously low. Girlfriend AI shutting down...';
-        document.body.style.background = 'linear-gradient(135deg, #000000 0%, #8b0000 100%)';
+        bg = 'linear-gradient(135deg, #000000 0%, #8b0000 100%)';
         document.getElementById('mainCard').classList.add('shake');
-
         setTimeout(() => {
             document.getElementById('mainCard').classList.remove('shake');
         }, 1000);
     }
 
+    // Always show final stage
+    document.body.style.background = bg;
     document.getElementById('stage3').classList.remove('active');
     document.getElementById('finalStage').classList.add('active');
-    document.getElementById('finalText').innerHTML = message + "<br><br>📸 Screenshot this and send proof.";
+
+    // Lock answer is always visible
+    document.getElementById('finalText').innerHTML = `
+        <p style="font-size:18px;">🔒 Your missing-me level has been locked!</p>
+        <p style="margin-top:10px;">${message}</p>
+        <p style="margin-top:15px; font-size:16px; color:#888;">📸 Screenshot this and send proof!</p>
+    `;
 
     // Celebration
     butterfliesCreated = false;
     createButterflies();
     setTimeout(createButterflies, 1000);
 }
+
 
 
     </script>
