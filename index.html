@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💕 Ultimate Valentine's Challenge for Mourad</title>
+    <title>💕 Challenge for Mourad</title>
     <style>
         * {
             margin: 0;
@@ -854,42 +854,82 @@
             }
         }
 
-        function finishGame() {
-            const slider = document.getElementById('missSlider');
-            const value = slider.value;
-            
-            let message = '';
-            if (value >= 100) {
-    message = '100%?!?? 🚨 OBSESSION DETECTED 🚨 Sir this is no longer missing me, this is emotional dependency. I approve. I miss you more tho 😌💕';
-} else if (value >= 98) {
-    message = '98%?? Why not 100?? WHO IS STEALING THE 2%?? 👀 Explain yourself immediately.';
-} else if (value >= 95) {
-    message = '95%?? That 5% better be work, sleep, or food. If it’s another girl we’re loading the boss level 😤🎮';
-} else if (value >= 90) {
-    message = '90%?! That’s elite behavior. You miss me but you’re pretending to be strong. Emotional damage accepted 💀💕';
-} else if (value >= 80) {
-    message = '80%? Okay Mr “I’m trying to act cool” but we both know it’s 100% in private 😏📱';
-} else if (value >= 70) {
-    message = '70%?? So you miss me… but you’re trying to look emotionally stable? Interesting strategy. I see you 👀';
-} else if (value >= 60) {
-    message = '60%?? Oh so we’re playing games now? I built this WHOLE game for you and this is what I get? 💀';
-} else if (value >= 50) {
-    message = '50%?? Half of you misses me and the other half is WHAT exactly?? I need names.';
-} else if (value >= 30) {
-    message = '30%?? Oh so we’re joking today. Restart the game . Immediately.';
-} else {
-    message = 'Below 30%?? The game has detected betrayal. Resetting boyfriend status… 💀';
+      function finishGame() {
+    const slider = document.getElementById('missSlider');
+    const value = parseInt(slider.value, 10);
+    const confirmBtn = document.getElementById('confirmBtn');
+    const characterStatus = document.getElementById('characterStatus');
+
+    // Irreversible warning
+    if (!confirm("⚠️ WARNING: This action cannot be undone.\nAre you sure you want to lock this level of missing me? 👀")) {
+        return;
+    }
+
+    // Freeze slider + button
+    slider.disabled = true;
+    confirmBtn.disabled = true;
+    confirmBtn.textContent = "Analyzing commitment... 🔍";
+
+    // Fake scanning sequence
+    characterStatus.innerHTML = '<p style="font-size:18px;">🧠 Running emotional scan...</p>';
+
+    setTimeout(() => {
+        characterStatus.innerHTML = '<p style="font-size:18px;">💓 Checking heartbeat levels...</p>';
+    }, 800);
+
+    setTimeout(() => {
+        characterStatus.innerHTML = '<p style="font-size:18px;">📊 Verifying loyalty database...</p>';
+    }, 1600);
+
+    setTimeout(() => {
+        showFinalResult(value);
+    }, 2500);
 }
 
-            
-            document.getElementById('stage3').classList.remove('active');
-            document.getElementById('finalStage').classList.add('active');
-            document.getElementById('finalText').textContent = message;
-            
-            // Final celebration
-            createButterflies();
-            setTimeout(createButterflies, 1000);
-        }
+
+function showFinalResult(value) {
+    let message = '';
+
+    if (value >= 100) {
+        message = '100%?!?? 🚨 OBSESSION DETECTED 🚨 Sir this is no longer missing me, this is emotional dependency. I approve. I miss you more tho 😌💕';
+        document.body.style.background = 'linear-gradient(135deg, #ff1493 0%, #ff69b4 100%)';
+    } else if (value >= 98) {
+        message = '98%?? Why not 100?? WHO IS STEALING THE 2%?? 👀 Explain yourself immediately.';
+    } else if (value >= 95) {
+        message = '95%?? That 5% better be work, sleep, or food. If it’s another girl we’re loading the boss level 😤🎮';
+    } else if (value >= 90) {
+        message = '90%?! That’s elite behavior. You miss me but you’re pretending to be strong. Emotional damage accepted 💀💕';
+    } else if (value >= 80) {
+        message = '80%? Okay Mr “I’m trying to act cool” but we both know it’s 100% in private 😏📱';
+    } else if (value >= 70) {
+        message = '70%?? So you miss me… but you’re trying to look emotionally stable? Interesting strategy. I see you 👀';
+    } else if (value >= 60) {
+        message = '60%?? Oh so we’re playing games now? I built this WHOLE game for you and this is what I get? 💀';
+    } else if (value >= 50) {
+        message = '50%?? Half of you misses me and the other half is WHAT exactly?? I need names.';
+    } else if (value >= 30) {
+        message = '30%?? Oh so we’re joking today. Restart the game. Immediately.';
+    } else {
+        message = '🚨 CRITICAL ERROR 🚨 Loyalty levels dangerously low. Girlfriend AI shutting down...';
+        document.body.style.background = 'linear-gradient(135deg, #000000 0%, #8b0000 100%)';
+        document.getElementById('mainCard').classList.add('shake');
+
+        setTimeout(() => {
+            document.getElementById('mainCard').classList.remove('shake');
+        }, 1000);
+    }
+
+    document.getElementById('stage3').classList.remove('active');
+    document.getElementById('finalStage').classList.add('active');
+    document.getElementById('finalText').innerHTML = message + "<br><br>📸 Screenshot this and send proof.";
+
+    // Celebration
+    butterfliesCreated = false;
+    createButterflies();
+    setTimeout(createButterflies, 1000);
+}
+
+
     </script>
 </body>
 </html>
