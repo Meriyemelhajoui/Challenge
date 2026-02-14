@@ -900,10 +900,12 @@ function startScan(value) {
 
 function showFinalResult(value) {
     let message = '';
+    let finalTitle = "🏆 YOU PASSED! 🏆";
+    let bg = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'; // default
 
     if (value >= 100) {
         message = '100%?!?? 🚨 OBSESSION DETECTED 🚨 Sir this is no longer missing me, this is emotional dependency. I approve. I miss you more tho 😌💕';
-        document.body.style.background = 'linear-gradient(135deg, #ff1493 0%, #ff69b4 100%)';
+        bg = 'linear-gradient(135deg, #ff1493 0%, #ff69b4 100%)';
     } else if (value >= 98) {
         message = '98%?? Why not 100?? WHO IS STEALING THE 2%?? 👀 Explain yourself immediately.';
     } else if (value >= 95) {
@@ -912,33 +914,39 @@ function showFinalResult(value) {
         message = '90%?! That’s elite behavior. You miss me but you’re pretending to be strong. Emotional damage accepted 💀💕';
     } else if (value >= 80) {
         message = '80%? Okay Mr “I’m trying to act cool” but we both know it’s 100% in private 😏📱';
-    } else if (value >= 70) {
-        message = '70%?? So you miss me… but you’re trying to look emotionally stable? Interesting strategy. I see you 👀';
-    } else if (value >= 60) {
-        message = '60%?? Oh so we’re playing games now? I built this WHOLE game for you and this is what I get? 💀';
-    } else if (value >= 50) {
-        message = '50%?? Half of you misses me and the other half is WHAT exactly?? I need names.';
-    } else if (value >= 30) {
-        message = '30%?? Oh so we’re joking today. Restart the game. Immediately.';
     } else {
-        message = '🚨 CRITICAL ERROR 🚨 Loyalty levels dangerously low. Girlfriend AI shutting down...';
-        document.body.style.background = 'linear-gradient(135deg, #000000 0%, #8b0000 100%)';
+        // value < 80 → FAIL message
+        finalTitle = "🚨 YOU FAILED 🚨";
+        if (value >= 70) {
+            message = '70%?? Not bad, but this is not enough! Step it up 😤';
+        } else if (value >= 50) {
+            message = '50%?? Half-hearted emotions detected 💔. Replay required.';
+        } else if (value >= 30) {
+            message = '30%?? Seriously? Emotional commitment too low 😱';
+        } else {
+            message = '🚨 CRITICAL ERROR 🚨 Loyalty levels dangerously low. Girlfriend AI shutting down...';
+        }
+        bg = 'linear-gradient(135deg, #ff6a6a 0%, #ff0000 100%)';
         document.getElementById('mainCard').classList.add('shake');
-
-        setTimeout(() => {
-            document.getElementById('mainCard').classList.remove('shake');
-        }, 1000);
+        setTimeout(() => document.getElementById('mainCard').classList.remove('shake'), 1000);
     }
 
     document.getElementById('stage3').classList.remove('active');
-    document.getElementById('finalStage').classList.add('active');
+    const finalStage = document.getElementById('finalStage');
+    finalStage.classList.add('active');
+    finalStage.querySelector('h1').innerHTML = finalTitle;
     document.getElementById('finalText').innerHTML = message + "<br><br>📸 Screenshot this and send proof.";
 
-    // Celebration
-    butterfliesCreated = false;
-    createButterflies();
-    setTimeout(createButterflies, 1000);
+    document.body.style.background = bg;
+
+    // Celebration only if passed (>=80)
+    if (value >= 80) {
+        butterfliesCreated = false;
+        createButterflies();
+        setTimeout(createButterflies, 1000);
+    }
 }
+
 
 
     </script>
