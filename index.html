@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💕 Challenge for Mourad</title>
+    <title>💕 Ultimate Valentine's Challenge for Mourad</title>
     <style>
         * {
             margin: 0;
@@ -854,37 +854,43 @@
             }
         }
 
-      function finishGame() {
+     function finishGame() {
     const slider = document.getElementById('missSlider');
     const value = parseInt(slider.value, 10);
     const confirmBtn = document.getElementById('confirmBtn');
     const characterStatus = document.getElementById('characterStatus');
 
-    // Irreversible warning
     if (!confirm("⚠️ WARNING: This action cannot be undone.\nAre you sure you want to lock this level of missing me? 👀")) {
         return;
     }
 
-    // Freeze slider + button
     slider.disabled = true;
     confirmBtn.disabled = true;
     confirmBtn.textContent = "Analyzing commitment... 🔍";
 
-    // Fake scanning sequence
-    characterStatus.innerHTML = '<p style="font-size:18px;">🧠 Running emotional scan...</p>';
+    characterStatus.innerHTML =
+        '<p style="font-size:18px;">🧠 Running emotional scan...</p>';
 
-    setTimeout(() => {
-        characterStatus.innerHTML = '<p style="font-size:18px;">💓 Checking heartbeat levels...</p>';
-    }, 800);
+    // 👇 Force browser repaint before starting timers
+    requestAnimationFrame(() => {
 
-    setTimeout(() => {
-        characterStatus.innerHTML = '<p style="font-size:18px;">📊 Verifying loyalty database...</p>';
-    }, 1600);
+        setTimeout(() => {
+            characterStatus.innerHTML =
+                '<p style="font-size:18px;">💓 Checking heartbeat levels...</p>';
+        }, 800);
 
-    setTimeout(() => {
-        showFinalResult(value);
-    }, 2500);
+        setTimeout(() => {
+            characterStatus.innerHTML =
+                '<p style="font-size:18px;">📊 Verifying loyalty database...</p>';
+        }, 1600);
+
+        setTimeout(() => {
+            showFinalResult(value);
+        }, 2800);
+
+    });
 }
+
 
 
 function showFinalResult(value) {
