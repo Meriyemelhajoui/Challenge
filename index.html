@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>:two_hearts:Challenge</title>
+    <title>💕Challenge</title>
     <style>
         * {
             margin: 0;
@@ -285,7 +285,7 @@
         }
 
         /* Larger slider thumb for mobile */
-        @rbouzad (max-width: 768px) {
+        @media (max-width: 768px) {
             .slider {
                 height: 20px;
             }
@@ -384,7 +384,7 @@
         }
 
         /* Mobile Responsive Styles */
-        @rbouzad (max-width: 768px) {
+        @media (max-width: 768px) {
             .card {
                 padding: 40px 30px;
                 width: 95%;
@@ -433,7 +433,7 @@
             }
         }
 
-        @rbouzad (max-width: 480px) {
+        @media (max-width: 480px) {
             .card {
                 padding: 30px 20px;
             }
@@ -482,69 +482,69 @@
 
         <!-- Stage 1: Escaping No Button -->
         <div class="stage active" id="stage1">
-            <div class="emoji">:two_hearts:</div>
-            <h1>Hey <span class="name">Mourad</span>! :eyes:</h1>
+            <div class="emoji">💕</div>
+            <h1>Hey <span class="name">Mourad</span>! 👀</h1>
             <p class="question">Level 1: Basic Question</p>
-            <p class="question" style="font-size: 28px; margin-top: 10px;">Do you miss me? :thought_balloon:</p>
+            <p class="question" style="font-size: 28px; margin-top: 10px;">Do you miss me? 💭</p>
             
             <div class="button-container">
-                <button class="yes-btn" onclick="passStage1()">Yes! :sparkling_heart:</button>
+                <button class="yes-btn" onclick="passStage1()">Yes! 💖</button>
                 <button class="no-btn" id="noBtn" onmouseover="moveButton()" onmouseenter="moveButton()" ontouchstart="moveButton()" onclick="moveButton()">No</button>
             </div>
         </div>
 
         <!-- Stage 2: Catch the Falling Answers -->
         <div class="stage" id="stage2">
-            <div class="emoji">:dart:</div>
-            <h1>Level 2: Catch the Truth! :video_game:</h1>
+            <div class="emoji">🎯</div>
+            <h1>Level 2: Catch the Truth! 🎮</h1>
             <p class="question">Careful! Not all answers are what they seem...</p>
             <p class="score">Correct answers caught: <span id="scoreDisplay">0/1</span></p>
             
             <div class="game-container" id="gameContainer">
-                <div class="basket">:gift_heart:</div>
+                <div class="basket">💝</div>
             </div>
             
-            <p style="color: #888; margin-top: 10px;">Choose wisely! Only the truth will let you pass :thinking_face:</p>
+            <p style="color: #888; margin-top: 10px;">Choose wisely! Only the truth will let you pass 🤔</p>
         </div>
 
         <!-- Stage 3: Love Meter -->
         <div class="stage" id="stage3">
             <div class="meme-container">
-                <div id="memeFace" class="meme-face">:neutral_face:</div>
+                <div id="memeFace" class="meme-face">😐</div>
             </div>
-            <h1>Level 3: Truth Detector :mag:</h1>
+            <h1>Level 3: Truth Detector 🔍</h1>
             <p class="question">Time to see if you're lying or not...</p>
-            <p style="color: #e91e63; font-weight: bold; margin: 10px 0;">How much do you ACTUALLY miss me? :face_with_raised_eyebrow:</p>
+            <p style="color: #e91e63; font-weight: bold; margin: 10px 0;">How much do you ACTUALLY miss me? 🤨</p>
             
             <div class="health-container">
                 <div class="health-bar-bg">
                     <div class="health-bar" id="healthBar"></div>
                 </div>
-                <p class="health-label" id="healthLabel">:neutral_face: Hmm... suspicious...</p>
+                <p class="health-label" id="healthLabel">😐 Hmm... suspicious...</p>
             </div>
 
             <div class="slider-container">
                 <input type="range" min="0" max="100" value="0" class="slider" id="missSlider">
-                <p style="margin-top: 10px; color: #888; font-size: 16px;">:point_up_2: Move it or lose it!</p>
+                <p style="margin-top: 10px; color: #888; font-size: 16px;">👆 Move it or lose it!</p>
             </div>
 
             <div class="character-status" id="characterStatus">
-                <p style="font-size: 18px; color: #666; margin-top: 20px;">:thought_balloon: "I'm watching you... :eye::lips::eye:"</p>
+                <p style="font-size: 18px; color: #666; margin-top: 20px;">💭 "I'm watching you... 👁️👄👁️"</p>
             </div>
 
             <button class="confirm-btn" id="confirmBtn" onclick="finishGame()" style="display: none;">
-                Lock it in! :lock:
+                Lock it in! 🔒
             </button>
         </div>
 
         <!-- Final Stage -->
         <div class="stage" id="finalStage">
-            <div class="celebration">:tada::sparkling_heart::confetti_ball:</div>
-            <h1>:trophy: YOU PASSED! :trophy:</h1>
+            <div class="celebration">🎉💖🎊</div>
+            <h1>🏆 YOU PASSED! 🏆</h1>
             <p class="question" id="finalText"></p>
-            <div class="celebration">:two_hearts::sparkles::butterfly::sparkles::two_hearts:</div>
+            <div class="celebration">💕✨🦋✨💕</div>
             <p style="margin-top: 30px; color: #888; font-size: 16px;">
-                Thanks for playing my lil game :joy::two_hearts:
+                Thanks for playing my lil game 😂💕
             </p>
         </div>
     </div>
@@ -560,7 +560,7 @@
         for (let i = 0; i < 15; i++) {
             const heart = document.createElement('div');
             heart.className = 'heart';
-            heart.textContent = [':two_hearts:', ':sparkling_heart:', ':heartpulse:', ':gift_heart:', ':heart:'][Math.floor(Math.random() * 5)];
+            heart.textContent = ['💕', '💖', '💗', '💝', '❤️'][Math.floor(Math.random() * 5)];
             heart.style.left = Math.random() * 100 + '%';
             heart.style.top = Math.random() * 100 + '%';
             heart.style.animationDelay = Math.random() * 4 + 's';
@@ -648,9 +648,9 @@
         });
 
         // Stage 2: Catching Game
-        const correctAnswers = ['Yes! :sparkling_heart:', 'Of course! :heart_eyes:', 'Always! :two_hearts:', 'Definitely! :smiling_face_with_3_hearts:'];
-        const wrongAnswers = ['Maybe... :thinking_face:', 'Not sure :sweat_smile:'];
-        const terribleAnswers = ['Who are you? :joy:', 'Nope :face_with_rolling_eyes:'];
+        const correctAnswers = ['Yes! 💖', 'Of course! 😍', 'Always! 💕', 'Definitely! 🥰'];
+        const wrongAnswers = ['Maybe... 🤔', 'Not sure 😅'];
+        const terribleAnswers = ['Who are you? 😂', 'Nope 🙄'];
 
         function createFallingAnswer(text, type) {
             const answer = document.createElement('div');
@@ -700,16 +700,16 @@
                 setTimeout(() => card.classList.remove('shake'), 500);
                 
                 const emoji = document.querySelector('#stage2 .emoji');
-                emoji.textContent = ':cold_sweat:';
-                setTimeout(() => emoji.textContent = ':dart:', 1000);
+                emoji.textContent = '😰';
+                setTimeout(() => emoji.textContent = '🎯', 1000);
             } else if (type === 'terrible-answer') {
                 const card = document.getElementById('mainCard');
                 card.classList.add('shake');
                 setTimeout(() => card.classList.remove('shake'), 500);
                 
                 const emoji = document.querySelector('#stage2 .emoji');
-                emoji.textContent = ':broken_heart:';
-                setTimeout(() => emoji.textContent = ':dart:', 1000);
+                emoji.textContent = '💔';
+                setTimeout(() => emoji.textContent = '🎯', 1000);
                 
                 // Play dramatic effect
                 document.body.style.background = 'linear-gradient(135deg, #ff0000 0%, #000000 100%)';
@@ -750,75 +750,85 @@
         }
 
         function updateHealth() {
-    const slider = document.getElementById('missSlider');
-    const value = slider.value;
-    const healthBar = document.getElementById('healthBar');
-    const healthLabel = document.getElementById('healthLabel');
-    const memeFace = document.getElementById('memeFace');
-    const characterStatus = document.getElementById('characterStatus');
-    const confirmBtn = document.getElementById('confirmBtn');
+            const slider = document.getElementById('missSlider');
+            const value = slider.value;
+            const healthBar = document.getElementById('healthBar');
+            const healthLabel = document.getElementById('healthLabel');
+            const memeFace = document.getElementById('memeFace');
+            const characterStatus = document.getElementById('characterStatus');
+            const confirmBtn = document.getElementById('confirmBtn');
 
-    healthBar.style.width = value + '%';
+            healthBar.style.width = value + '%';
+            
+            if (value >= 75) {
+                healthBar.classList.add('heartbeat');
+            } else {
+                healthBar.classList.remove('heartbeat');
+            }
 
-    if (value >= 75) {
-        healthBar.classList.add('heartbeat');
-    } else {
-        healthBar.classList.remove('heartbeat');
-    }
+            // Update meme face with animation
+            memeFace.style.animation = 'none';
+            setTimeout(() => {
+                memeFace.style.animation = 'memeAppear 0.3s ease';
+            }, 10);
 
-    memeFace.style.animation = 'none';
-    setTimeout(() => {
-        memeFace.style.animation = 'memeAppear 0.3s ease';
-    }, 10);
-
-    // Always show confirm button, change emoji per level
-    confirmBtn.style.display = 'block';
-
-    if (value < 10) {
-        healthLabel.textContent = ':neutral_face: Hmm... really?';
-        healthLabel.style.color = '#ff4444';
-        memeFace.textContent = ':neutral_face:';
-        characterStatus.innerHTML = '<p style="font-size: 18px; color: #666;">:thought_balloon: "I thought you\'d miss me more..."</p>';
-        confirmBtn.textContent = "Lock it in! :neutral_face:";
-    } else if (value < 20) {
-        healthLabel.textContent = ':face_with_raised_eyebrow: Are you sure about that?';
-        healthLabel.style.color = '#ff6644';
-        memeFace.textContent = ':face_with_raised_eyebrow:';
-        characterStatus.innerHTML = '<p style="font-size: 18px; color: #666;">:thought_balloon: "Come on, be honest :blush:"</p>';
-        confirmBtn.textContent = "Lock it in! :face_with_raised_eyebrow:";
-    } else if (value < 35) {
-        healthLabel.textContent = ':unamused: That\'s all?';
-        healthLabel.style.color = '#ff8844';
-        memeFace.textContent = ':unamused:';
-        characterStatus.innerHTML = '<p style="font-size: 18px; color: #666;">:thought_balloon: "I know you can do better..."</p>';
-        confirmBtn.textContent = "Lock it in! :unamused:";
-    } else if (value < 50) {
-        healthLabel.textContent = ':face_with_rolling_eyes: Mid energy detected';
-        healthLabel.style.color = '#ffaa44';
-        memeFace.textContent = ':face_with_rolling_eyes:';
-        characterStatus.innerHTML = '<p style="font-size: 18px; color: #666;">:thought_balloon: "Emm.. I\'ve seen better :nail_care:"</p>';
-        confirmBtn.textContent = "Lock it in! :face_with_rolling_eyes:";
-    } else if (value < 65) {
-        healthLabel.textContent = ':smirk: Now we\'re talking...';
-        healthLabel.style.color = '#ffdd00';
-        memeFace.textContent = ':smirk:';
-        characterStatus.innerHTML = '<p style="font-size: 18px; color: #666;">:thought_balloon: "Okay okay, I see you :eyes:"</p>';
-        confirmBtn.textContent = "Lock it in! :smirk:";
-    } else if (value < 80) {
-        healthLabel.textContent = ':flushed: Hold up...!';
-        healthLabel.style.color = '#88dd44';
-        memeFace.textContent = ':flushed:';
-        characterStatus.innerHTML = '<p style="font-size: 20px; color: #e91e63;">:thought_balloon: "Wait that\'s actually kinda sweet :pleading_face::point_right::point_left:"</p>';
-        confirmBtn.textContent = "Lock it in! :flushed:";
-    } else if (value < 90) {
-        healthLabel.textContent = ':face_holding_back_tears: That\'s sweet...';
-        healthLabel.style.color = '#00dd88';
-        memeFace.textContent = ':face_holding_back_tears:';
-        characterStatus.innerHTML = '<p style="font-size: 20px; color: #e91e63; font-weight: bold;">:thought_balloon: "You\'re making me smile :blush::two_hearts:"</p>';
-        confirmBtn.textContent = "Lock it in! :face_holding_back_tears:";
-    } else if (value < 98) {
-        healthLabel.textContent = ':sob: Aww really?';
-
+            if (value < 10) {
+                healthLabel.textContent = '😐 Hmm... really?';
+                healthLabel.style.color = '#ff4444';
+                memeFace.textContent = '😐';
+                characterStatus.innerHTML = '<p style="font-size: 18px; color: #666;">💭 "I thought you\'d miss me more..."</p>';
+                confirmBtn.style.display = 'none';
+            } else if (value < 20) {
+                healthLabel.textContent = '🤨 Are you sure about that?';
+                healthLabel.style.color = '#ff6644';
+                memeFace.textContent = '🤨';
+                characterStatus.innerHTML = '<p style="font-size: 18px; color: #666;">💭 "Come on, be honest 😊"</p>';
+                confirmBtn.style.display = 'none';
+            } else if (value < 35) {
+                healthLabel.textContent = '😒 That\'s all?';
+                healthLabel.style.color = '#ff8844';
+                memeFace.textContent = '😒';
+                characterStatus.innerHTML = '<p style="font-size: 18px; color: #666;">💭 "I know you can do better..."</p>';
+                confirmBtn.style.display = 'none';
+            } else if (value < 50) {
+                healthLabel.textContent = '🙄 Mid energy detected';
+                healthLabel.style.color = '#ffaa44';
+                memeFace.textContent = '🙄';
+                characterStatus.innerHTML = '<p style="font-size: 18px; color: #666;">💭 "Emm.. I\'ve seen better 💅"</p>';
+                confirmBtn.style.display = 'none';
+            } else if (value < 65) {
+                healthLabel.textContent = '😏 Now we\'re talking...';
+                healthLabel.style.color = '#ffdd00';
+                memeFace.textContent = '😏';
+                characterStatus.innerHTML = '<p style="font-size: 18px; color: #666;">💭 "Okay okay, I see you 👀"</p>';
+                confirmBtn.style.display = 'none';
+            } else if (value < 80) {
+                healthLabel.textContent = '😳 Hold up...!';
+                healthLabel.style.color = '#88dd44';
+                memeFace.textContent = '😳';
+                characterStatus.innerHTML = '<p style="font-size: 20px; color: #e91e63;">💭 "Wait that\'s actually kinda sweet 🥺👉👈"</p>';
+                confirmBtn.style.display = 'none';
+            } else if (value < 90) {
+                healthLabel.textContent = '🥹 That\'s sweet...';
+                healthLabel.style.color = '#00dd88';
+                memeFace.textContent = '🥹';
+                characterStatus.innerHTML = '<p style="font-size: 20px; color: #e91e63; font-weight: bold;">💭 "You\'re making me smile 😊💕"</p>';
+                confirmBtn.style.display = 'block';
+            } else if (value < 98) {
+                healthLabel.textContent = '😭 Aww really?';
+                healthLabel.style.color = '#00ff88';
+                memeFace.textContent = '😭';
+                characterStatus.innerHTML = '<p style="font-size: 20px; color: #e91e63; font-weight: bold;">💭 "That\'s so sweet! 🥰"</p>';
+                confirmBtn.style.display = 'block';
+            } else {
+                healthLabel.textContent = '🤯 WHAT THE- 100%?!';
+                healthLabel.style.color = '#ff1493';
+                memeFace.textContent = '🤯';
+                characterStatus.innerHTML = '<p style="font-size: 22px; color: #e91e63; font-weight: bold;">💭 "100%? okay you\'re really sweet 🥰💕"</p>';
+                confirmBtn.style.display = 'block';
+                createButterflies();
+            }
+        }
 
         let butterfliesCreated = false;
 
@@ -826,7 +836,7 @@
             if (butterfliesCreated) return;
             butterfliesCreated = true;
             
-            const butterflies = [':butterfly:', ':gift_heart:', ':sparkling_heart:', ':sparkles:', ':two_hearts:'];
+            const butterflies = ['🦋', '💝', '💖', '✨', '💕'];
             for (let i = 0; i < 20; i++) {
                 setTimeout(() => {
                     const butterfly = document.createElement('div');
@@ -856,7 +866,7 @@
 
     characterStatus.innerHTML = `
         <p style="font-size:20px; color:#e91e63; font-weight:bold;">
-        :warning: FINAL ANSWER DETECTED
+        ⚠️ FINAL ANSWER DETECTED
         </p>
         <p style="margin-top:10px;">
         Once locked, your level of missing me cannot be changed.
@@ -870,7 +880,7 @@
             color:white;
             font-weight:bold;
             cursor:pointer;">
-            Lock It In :closed_lock_with_key:
+            Lock It In 🔐
         </button>
     `;
 
@@ -882,11 +892,11 @@ function startScan(value) {
     const characterStatus = document.getElementById('characterStatus');
 
     characterStatus.innerHTML =
-        '<p style="font-size:18px;">:brain: Running emotional scan...</p>';
+        '<p style="font-size:18px;">🧠 Running emotional scan...</p>';
 
     setTimeout(() => {
         characterStatus.innerHTML =
-            '<p style="font-size:18px;">:heartbeat: Checking heartbeat levels...</p>';
+            '<p style="font-size:18px;">💓 Checking heartbeat levels...</p>';
     }, 900);
 
     setTimeout(() => {
@@ -896,56 +906,48 @@ function startScan(value) {
 
 
 
+
 function showFinalResult(value) {
     let message = '';
-    let bg = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'; // default
 
     if (value >= 100) {
-        message = '100%?!?? :rotating_light: OBSESSION DETECTED :rotating_light: Sir this is no longer missing me, this is emotional dependency. I approve. I miss you more tho :relieved::two_hearts:';
-        bg = 'linear-gradient(135deg, #ff1493 0%, #ff69b4 100%)';
+        message = '100%?!?? 🚨 OBSESSION DETECTED 🚨 Sir this is no longer missing me, this is emotional dependency. I approve. I miss you more tho 😌💕';
+        document.body.style.background = 'linear-gradient(135deg, #ff1493 0%, #ff69b4 100%)';
     } else if (value >= 98) {
-        message = '98%?? Why not 100?? WHO IS STEALING THE 2%?? :eyes: Explain yourself immediately.';
+        message = '98%?? Why not 100?? WHO IS STEALING THE 2%?? 👀 Explain yourself immediately.';
     } else if (value >= 95) {
-        message = '95%?? That 5% better be work, sleep, or food. If it’s another girl we’re loading the boss level :triumph::video_game:';
+        message = '95%?? That 5% better be work, sleep, or food. If it’s another girl we’re loading the boss level 😤🎮';
     } else if (value >= 90) {
-        message = '90%?! That’s elite behavior. You miss me but you’re pretending to be strong. Emotional damage accepted :skull::two_hearts:';
+        message = '90%?! That’s elite behavior. You miss me but you’re pretending to be strong. Emotional damage accepted 💀💕';
     } else if (value >= 80) {
-        message = '80%? Okay Mr “I’m trying to act cool” but we both know it’s 100% in private :smirk::iphone:';
+        message = '80%? Okay Mr “I’m trying to act cool” but we both know it’s 100% in private 😏📱';
     } else if (value >= 70) {
-        message = '70%?? So you miss me… but you’re trying to look emotionally stable? Interesting strategy. I see you :eyes:';
+        message = '70%?? So you miss me… but you’re trying to look emotionally stable? Interesting strategy. I see you 👀';
     } else if (value >= 60) {
-        message = '60%?? Oh so we’re playing games now? I built this WHOLE game for you and this is what I get? :skull:';
+        message = '60%?? Oh so we’re playing games now? I built this WHOLE game for you and this is what I get? 💀';
     } else if (value >= 50) {
         message = '50%?? Half of you misses me and the other half is WHAT exactly?? I need names.';
     } else if (value >= 30) {
         message = '30%?? Oh so we’re joking today. Restart the game. Immediately.';
     } else {
-        message = ':rotating_light: CRITICAL ERROR :rotating_light: Loyalty levels dangerously low. Girlfriend AI shutting down...';
-        bg = 'linear-gradient(135deg, #000000 0%, #8b0000 100%)';
+        message = '🚨 CRITICAL ERROR 🚨 Loyalty levels dangerously low. Girlfriend AI shutting down...';
+        document.body.style.background = 'linear-gradient(135deg, #000000 0%, #8b0000 100%)';
         document.getElementById('mainCard').classList.add('shake');
+
         setTimeout(() => {
             document.getElementById('mainCard').classList.remove('shake');
         }, 1000);
     }
 
-    // Always show final stage
-    document.body.style.background = bg;
     document.getElementById('stage3').classList.remove('active');
     document.getElementById('finalStage').classList.add('active');
-
-    // Lock answer is always visible
-    document.getElementById('finalText').innerHTML = `
-        <p style="font-size:18px;">:lock: Your missing-me level has been locked!</p>
-        <p style="margin-top:10px;">${message}</p>
-        <p style="margin-top:15px; font-size:16px; color:#888;">:camera_with_flash: Screenshot this and send proof!</p>
-    `;
+    document.getElementById('finalText').innerHTML = message + "<br><br>📸 Screenshot this and send proof.";
 
     // Celebration
     butterfliesCreated = false;
     createButterflies();
     setTimeout(createButterflies, 1000);
 }
-
 
 
     </script>
