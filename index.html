@@ -860,35 +860,32 @@
     const confirmBtn = document.getElementById('confirmBtn');
     const characterStatus = document.getElementById('characterStatus');
 
-    if (!confirm("⚠️ WARNING: This action cannot be undone.\nAre you sure you want to lock this level of missing me? 👀")) {
-        return;
-    }
-
     slider.disabled = true;
     confirmBtn.disabled = true;
     confirmBtn.textContent = "Analyzing commitment... 🔍";
+    confirmBtn.style.background = "#444";
 
     characterStatus.innerHTML =
-        '<p style="font-size:18px;">🧠 Running emotional scan...</p>';
+        '<p style="font-size:20px; color:#e91e63; font-weight:bold;">⚠️ Final answer locked. Processing...</p>';
 
-    // 👇 Force browser repaint before starting timers
-    requestAnimationFrame(() => {
+    setTimeout(() => {
+        characterStatus.innerHTML =
+            '<p style="font-size:18px;">🧠 Running emotional scan...</p>';
+    }, 600);
 
-        setTimeout(() => {
-            characterStatus.innerHTML =
-                '<p style="font-size:18px;">💓 Checking heartbeat levels...</p>';
-        }, 800);
+    setTimeout(() => {
+        characterStatus.innerHTML =
+            '<p style="font-size:18px;">💓 Checking heartbeat levels...</p>';
+    }, 1400);
 
-        setTimeout(() => {
-            characterStatus.innerHTML =
-                '<p style="font-size:18px;">📊 Verifying loyalty database...</p>';
-        }, 1600);
+    setTimeout(() => {
+        characterStatus.innerHTML =
+            '<p style="font-size:18px;">📊 Verifying loyalty database...</p>';
+    }, 2200);
 
-        setTimeout(() => {
-            showFinalResult(value);
-        }, 2800);
-
-    });
+    setTimeout(() => {
+        showFinalResult(value);
+    }, 3500);
 }
 
 
