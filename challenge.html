@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💕 Ultimate Valentine's Challenge for Mourad</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            touch-action: manipulation;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 30px;
+            animation: float 4s infinite ease-in-out;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        .card {
+            background: white;
+            border-radius: 30px;
+            padding: 60px 50px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            z-index: 10;
+            animation: cardEntrance 0.6s ease-out;
+        }
+
+        @keyframes cardEntrance {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .shake {
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .emoji {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        h1 {
+            color: #333;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .name {
+            color: #e91e63;
+            font-weight: bold;
+        }
+
+        .question {
+            font-size: 24px;
+            color: #555;
+            margin: 30px 0;
+            font-weight: 500;
+        }
+
+        .stage {
+            display: none;
+        }
+
+        .stage.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Stage 1: Escaping Button */
+        .button-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+            position: relative;
+            height: 80px;
+        }
+
+        button {
+            padding: 15px 50px;
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .yes-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .yes-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(245, 87, 108, 0.5);
+        }
+
+        .no-btn {
+            background: #ddd;
+            color: #666;
+            position: absolute;
+            transition: all 0.05s ease;
+        }
+
+        /* Stage 2: Catching Game */
+        .game-container {
+            position: relative;
+            height: 400px;
+            background: linear-gradient(180deg, #fff0f5 0%, #ffe0f0 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .falling-answer {
+            position: absolute;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            animation: fall linear;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            color: #333;
+        }
+
+        @keyframes fall {
+            to {
+                top: 100%;
+            }
+        }
+
+        .basket {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 60px;
+            animation: basketMove 2s ease-in-out infinite;
+        }
+
+        @keyframes basketMove {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        .score {
+            font-size: 20px;
+            color: #e91e63;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        /* Stage 3: Love Meter */
+        .health-container {
+            margin: 30px 0;
+        }
+
+        .health-bar-bg {
+            width: 100%;
+            height: 40px;
+            background: #ddd;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .health-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #ff4444 0%, #ffaa00 25%, #ffff00 50%, #88ff00 75%, #00ff88 100%);
+            transition: width 0.3s ease;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+        }
+
+        .health-bar.heartbeat {
+            animation: heartbeat 1s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.05); }
+            50% { transform: scale(1); }
+        }
+
+        .health-label {
+            margin-top: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #ff4444;
+            transition: color 0.3s ease;
+        }
+
+        .slider-container {
+            margin: 30px 0;
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 15px;
+            border-radius: 10px;
+            background: #ddd;
+            outline: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(245, 87, 108, 0.5);
+        }
+
+        .slider::-moz-range-thumb {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            cursor: pointer;
+            border: none;
+        }
+
+        /* Larger slider thumb for mobile */
+        @media (max-width: 768px) {
+            .slider {
+                height: 20px;
+            }
+
+            .slider::-webkit-slider-thumb {
+                width: 40px;
+                height: 40px;
+            }
+
+            .slider::-moz-range-thumb {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        .character-status {
+            margin: 20px 0;
+            min-height: 60px;
+        }
+
+        .meme-container {
+            margin: 20px 0;
+            min-height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .meme-face {
+            font-size: 80px;
+            line-height: 1;
+            animation: memeAppear 0.3s ease;
+        }
+
+        @keyframes memeAppear {
+            from {
+                transform: scale(0) rotate(-180deg);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        .meme-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+            font-family: 'Impact', sans-serif;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 0px white, -2px -2px 0px white, 2px -2px 0px white, -2px 2px 0px white;
+            margin-top: 10px;
+        }
+
+        .confirm-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        .confirm-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Final Stage */
+        .celebration {
+            font-size: 50px;
+            margin: 20px 0;
+        }
+
+        @keyframes flyUp {
+            to {
+                transform: translateY(-1000px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #ddd;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%);
+            width: 33%;
+            transition: width 0.5s ease;
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            .card {
+                padding: 40px 30px;
+                width: 95%;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+            .question {
+                font-size: 20px;
+            }
+
+            .emoji, .meme-face {
+                font-size: 60px;
+            }
+
+            button {
+                padding: 12px 35px;
+                font-size: 18px;
+            }
+
+            .game-container {
+                height: 350px;
+            }
+
+            .falling-answer {
+                padding: 12px 20px;
+                font-size: 16px;
+            }
+
+            .basket {
+                font-size: 50px;
+            }
+
+            .character-status p {
+                font-size: 16px !important;
+            }
+
+            .health-label {
+                font-size: 18px;
+            }
+
+            .button-container {
+                height: 60px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+
+            .question {
+                font-size: 18px;
+                margin: 20px 0;
+            }
+
+            .emoji, .meme-face {
+                font-size: 50px;
+            }
+
+            button {
+                padding: 10px 30px;
+                font-size: 16px;
+            }
+
+            .game-container {
+                height: 300px;
+            }
+
+            .falling-answer {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+
+            .basket {
+                font-size: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+
+    <div class="card" id="mainCard">
+        <!-- Progress Bar -->
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <!-- Stage 1: Escaping No Button -->
+        <div class="stage active" id="stage1">
+            <div class="emoji">💕</div>
+            <h1>Hey <span class="name">Mourad</span>! 👀</h1>
+            <p class="question">Level 1: Basic Question</p>
+            <p class="question" style="font-size: 28px; margin-top: 10px;">Do you miss me? 💭</p>
+            
+            <div class="button-container">
+                <button class="yes-btn" onclick="passStage1()">Yes! 💖</button>
+                <button class="no-btn" id="noBtn" onmouseover="moveButton()" onmouseenter="moveButton()" ontouchstart="moveButton()" onclick="moveButton()">No</button>
+            </div>
+        </div>
+
+        <!-- Stage 2: Catch the Falling Answers -->
+        <div class="stage" id="stage2">
+            <div class="emoji">🎯</div>
+            <h1>Level 2: Catch the Truth! 🎮</h1>
+            <p class="question">Careful! Not all answers are what they seem...</p>
+            <p class="score">Correct answers caught: <span id="scoreDisplay">0/1</span></p>
+            
+            <div class="game-container" id="gameContainer">
+                <div class="basket">💝</div>
+            </div>
+            
+            <p style="color: #888; margin-top: 10px;">Choose wisely! Only the truth will let you pass 🤔</p>
+        </div>
+
+        <!-- Stage 3: Love Meter -->
+        <div class="stage" id="stage3">
+            <div class="meme-container">
+                <div id="memeFace" class="meme-face">😐</div>
+            </div>
+            <h1>Level 3: Truth Detector 🔍</h1>
+            <p class="question">Time to see if you're lying or not...</p>
+            <p style="color: #e91e63; font-weight: bold; margin: 10px 0;">How much do you ACTUALLY miss me? 🤨</p>
+            
+            <div class="health-container">
+                <div class="health-bar-bg">
+                    <div class="health-bar" id="healthBar"></div>
+                </div>
+                <p class="health-label" id="healthLabel">😐 Hmm... suspicious...</p>
+            </div>
+
+            <div class="slider-container">
+                <input type="range" min="0" max="100" value="0" class="slider" id="missSlider">
+                <p style="margin-top: 10px; color: #888; font-size: 16px;">👆 Move it or lose it!</p>
+            </div>
+
+            <div class="character-status" id="characterStatus">
+                <p style="font-size: 18px; color: #666; margin-top: 20px;">💭 "I'm watching you... 👁️👄👁️"</p>
+            </div>
+
+            <button class="confirm-btn" id="confirmBtn" onclick="finishGame()" style="display: none;">
+                Lock it in! 🔒
+            </button>
+        </div>
+
+        <!-- Final Stage -->
+        <div class="stage" id="finalStage">
+            <div class="celebration">🎉💖🎊</div>
+            <h1>🏆 YOU PASSED! 🏆</h1>
+            <p class="question" id="finalText"></p>
+            <div class="celebration">💕✨🦋✨💕</div>
+            <p style="margin-top: 30px; color: #888; font-size: 16px;">
+                Thanks for playing my lil game 😂💕
+            </p>
+        </div>
+    </div>
+
+    <script>
+        let currentStage = 1;
+        let gameStarted = false;
+        let answersNeeded = 1;
+        let answersCaught = 0;
+
+        // Create floating hearts
+        const heartsContainer = document.getElementById('hearts');
+        for (let i = 0; i < 15; i++) {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.textContent = ['💕', '💖', '💗', '💝', '❤️'][Math.floor(Math.random() * 5)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.top = Math.random() * 100 + '%';
+            heart.style.animationDelay = Math.random() * 4 + 's';
+            heartsContainer.appendChild(heart);
+        }
+
+        // Stage 1: Moving No button
+        let noBtnInterval;
+        
+        function moveButton() {
+            const noBtn = document.getElementById('noBtn');
+            const card = document.querySelector('.card');
+            
+            const cardRect = card.getBoundingClientRect();
+            const btnRect = noBtn.getBoundingClientRect();
+            
+            // Adjust for mobile screens
+            const isMobile = window.innerWidth <= 768;
+            const maxX = cardRect.width - btnRect.width - (isMobile ? 20 : 40);
+            const maxY = isMobile ? 100 : 150;
+            
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+            
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        }
+
+        function passStage1() {
+            if (noBtnInterval) clearInterval(noBtnInterval);
+            document.getElementById('stage1').classList.remove('active');
+            document.getElementById('stage2').classList.add('active');
+            document.getElementById('progressFill').style.width = '66%';
+            currentStage = 2;
+            setTimeout(startCatchingGame, 500);
+        }
+
+        // Start tracking mouse near No button
+        document.addEventListener('mousemove', (e) => {
+            if (currentStage !== 1) return;
+            
+            const noBtn = document.getElementById('noBtn');
+            const btnRect = noBtn.getBoundingClientRect();
+            
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+            
+            const btnCenterX = btnRect.left + btnRect.width / 2;
+            const btnCenterY = btnRect.top + btnRect.height / 2;
+            
+            const distance = Math.sqrt(
+                Math.pow(mouseX - btnCenterX, 2) + 
+                Math.pow(mouseY - btnCenterY, 2)
+            );
+            
+            // Move if mouse gets within 100px
+            if (distance < 100) {
+                moveButton();
+            }
+        });
+
+        // Touch support for mobile
+        document.addEventListener('touchmove', (e) => {
+            if (currentStage !== 1) return;
+            
+            const noBtn = document.getElementById('noBtn');
+            const btnRect = noBtn.getBoundingClientRect();
+            
+            const touch = e.touches[0];
+            const touchX = touch.clientX;
+            const touchY = touch.clientY;
+            
+            const btnCenterX = btnRect.left + btnRect.width / 2;
+            const btnCenterY = btnRect.top + btnRect.height / 2;
+            
+            const distance = Math.sqrt(
+                Math.pow(touchX - btnCenterX, 2) + 
+                Math.pow(touchY - btnCenterY, 2)
+            );
+            
+            // Move if touch gets within 120px (larger for mobile since fingers are less precise)
+            if (distance < 120) {
+                moveButton();
+            }
+        });
+
+        // Stage 2: Catching Game
+        const correctAnswers = ['Yes! 💖', 'Of course! 😍', 'Always! 💕', 'Definitely! 🥰'];
+        const wrongAnswers = ['Maybe... 🤔', 'Not sure 😅'];
+        const terribleAnswers = ['Who are you? 😂', 'Nope 🙄'];
+
+        function createFallingAnswer(text, type) {
+            const answer = document.createElement('div');
+            answer.className = 'falling-answer';
+            answer.textContent = text;
+            answer.style.left = Math.random() * 80 + '%';
+            answer.style.top = '-50px';
+            answer.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            answer.dataset.type = type; // Store type as data attribute
+            
+            const gameContainer = document.getElementById('gameContainer');
+            gameContainer.appendChild(answer);
+            
+            // Support both click and touch
+            answer.addEventListener('click', () => handleAnswerClick(answer, type));
+            answer.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                handleAnswerClick(answer, type);
+            });
+            
+            setTimeout(() => {
+                if (answer.parentNode) {
+                    answer.remove();
+                }
+            }, 6000);
+        }
+
+        function handleAnswerClick(answer, type) {
+            answer.remove();
+            
+            if (type === 'correct-answer') {
+                answersCaught++;
+                document.getElementById('scoreDisplay').textContent = `${answersCaught}/${answersNeeded}`;
+                
+                if (answersCaught >= answersNeeded) {
+                    setTimeout(() => {
+                        document.getElementById('stage2').classList.remove('active');
+                        document.getElementById('stage3').classList.add('active');
+                        document.getElementById('progressFill').style.width = '100%';
+                        currentStage = 3;
+                        initializeSlider();
+                    }, 1000);
+                }
+            } else if (type === 'wrong-answer') {
+                const card = document.getElementById('mainCard');
+                card.classList.add('shake');
+                setTimeout(() => card.classList.remove('shake'), 500);
+                
+                const emoji = document.querySelector('#stage2 .emoji');
+                emoji.textContent = '😰';
+                setTimeout(() => emoji.textContent = '🎯', 1000);
+            } else if (type === 'terrible-answer') {
+                const card = document.getElementById('mainCard');
+                card.classList.add('shake');
+                setTimeout(() => card.classList.remove('shake'), 500);
+                
+                const emoji = document.querySelector('#stage2 .emoji');
+                emoji.textContent = '💔';
+                setTimeout(() => emoji.textContent = '🎯', 1000);
+                
+                // Play dramatic effect
+                document.body.style.background = 'linear-gradient(135deg, #ff0000 0%, #000000 100%)';
+                setTimeout(() => {
+                    document.body.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                }, 300);
+            }
+        }
+
+        function startCatchingGame() {
+            gameStarted = true;
+            
+            // Spawn answers periodically - faster for more challenge!
+            const spawnInterval = setInterval(() => {
+                if (currentStage !== 2) {
+                    clearInterval(spawnInterval);
+                    return;
+                }
+                
+                const random = Math.random();
+                if (random < 0.3) {
+                    const text = correctAnswers[Math.floor(Math.random() * correctAnswers.length)];
+                    createFallingAnswer(text, 'correct-answer');
+                } else if (random < 0.65) {
+                    const text = wrongAnswers[Math.floor(Math.random() * wrongAnswers.length)];
+                    createFallingAnswer(text, 'wrong-answer');
+                } else {
+                    const text = terribleAnswers[Math.floor(Math.random() * terribleAnswers.length)];
+                    createFallingAnswer(text, 'terrible-answer');
+                }
+            }, 1200);
+        }
+
+        // Stage 3: Love Meter
+        function initializeSlider() {
+            const slider = document.getElementById('missSlider');
+            slider.addEventListener('input', updateHealth);
+        }
+
+        function updateHealth() {
+            const slider = document.getElementById('missSlider');
+            const value = slider.value;
+            const healthBar = document.getElementById('healthBar');
+            const healthLabel = document.getElementById('healthLabel');
+            const memeFace = document.getElementById('memeFace');
+            const characterStatus = document.getElementById('characterStatus');
+            const confirmBtn = document.getElementById('confirmBtn');
+
+            healthBar.style.width = value + '%';
+            
+            if (value >= 75) {
+                healthBar.classList.add('heartbeat');
+            } else {
+                healthBar.classList.remove('heartbeat');
+            }
+
+            // Update meme face with animation
+            memeFace.style.animation = 'none';
+            setTimeout(() => {
+                memeFace.style.animation = 'memeAppear 0.3s ease';
+            }, 10);
+
+            if (value < 10) {
+                healthLabel.textContent = '😐 Hmm... really?';
+                healthLabel.style.color = '#ff4444';
+                memeFace.textContent = '😐';
+                characterStatus.innerHTML = '<p style="font-size: 18px; color: #666;">💭 "I thought you\'d miss me more..."</p>';
+                confirmBtn.style.display = 'none';
+            } else if (value < 20) {
+                healthLabel.textContent = '🤨 Are you sure about that?';
+                healthLabel.style.color = '#ff6644';
+                memeFace.textContent = '🤨';
+                characterStatus.innerHTML = '<p style="font-size: 18px; color: #666;">💭 "Come on, be honest 😊"</p>';
+                confirmBtn.style.display = 'none';
+            } else if (value < 35) {
+                healthLabel.textContent = '😒 That\'s all?';
+                healthLabel.style.color = '#ff8844';
+                memeFace.textContent = '😒';
+                characterStatus.innerHTML = '<p style="font-size: 18px; color: #666;">💭 "I know you can do better..."</p>';
+                confirmBtn.style.display = 'none';
+            } else if (value < 50) {
+                healthLabel.textContent = '🙄 Mid energy detected';
+                healthLabel.style.color = '#ffaa44';
+                memeFace.textContent = '🙄';
+                characterStatus.innerHTML = '<p style="font-size: 18px; color: #666;">💭 "Meh. I\'ve seen better 💅"</p>';
+                confirmBtn.style.display = 'none';
+            } else if (value < 65) {
+                healthLabel.textContent = '😏 Now we\'re talking...';
+                healthLabel.style.color = '#ffdd00';
+                memeFace.textContent = '😏';
+                characterStatus.innerHTML = '<p style="font-size: 18px; color: #666;">💭 "Okay okay, I see you 👀"</p>';
+                confirmBtn.style.display = 'none';
+            } else if (value < 80) {
+                healthLabel.textContent = '😳 Hold up...!';
+                healthLabel.style.color = '#88dd44';
+                memeFace.textContent = '😳';
+                characterStatus.innerHTML = '<p style="font-size: 20px; color: #e91e63;">💭 "Wait that\'s actually kinda sweet 🥺👉👈"</p>';
+                confirmBtn.style.display = 'none';
+            } else if (value < 90) {
+                healthLabel.textContent = '🥹 That\'s sweet...';
+                healthLabel.style.color = '#00dd88';
+                memeFace.textContent = '🥹';
+                characterStatus.innerHTML = '<p style="font-size: 20px; color: #e91e63; font-weight: bold;">💭 "You\'re making me smile 😊💕"</p>';
+                confirmBtn.style.display = 'block';
+            } else if (value < 98) {
+                healthLabel.textContent = '😭 Aww really?';
+                healthLabel.style.color = '#00ff88';
+                memeFace.textContent = '😭';
+                characterStatus.innerHTML = '<p style="font-size: 20px; color: #e91e63; font-weight: bold;">💭 "That\'s so sweet! 🥰"</p>';
+                confirmBtn.style.display = 'block';
+            } else {
+                healthLabel.textContent = '🤯 WHAT THE- 100%?!';
+                healthLabel.style.color = '#ff1493';
+                memeFace.textContent = '🤯';
+                characterStatus.innerHTML = '<p style="font-size: 22px; color: #e91e63; font-weight: bold;">💭 "100%? okay you\'re really sweet 🥰💕"</p>';
+                confirmBtn.style.display = 'block';
+                createButterflies();
+            }
+        }
+
+        let butterfliesCreated = false;
+
+        function createButterflies() {
+            if (butterfliesCreated) return;
+            butterfliesCreated = true;
+            
+            const butterflies = ['🦋', '💝', '💖', '✨', '💕'];
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const butterfly = document.createElement('div');
+                    butterfly.style.position = 'fixed';
+                    butterfly.style.left = Math.random() * 100 + '%';
+                    butterfly.style.top = '100%';
+                    butterfly.style.fontSize = '30px';
+                    butterfly.style.zIndex = '1000';
+                    butterfly.textContent = butterflies[Math.floor(Math.random() * butterflies.length)];
+                    butterfly.style.animation = 'flyUp 3s ease-out forwards';
+                    document.body.appendChild(butterfly);
+                    
+                    setTimeout(() => butterfly.remove(), 3000);
+                }, i * 100);
+            }
+        }
+
+        function finishGame() {
+            const slider = document.getElementById('missSlider');
+            const value = slider.value;
+            
+            let message = '';
+            if (value >= 98) {
+                message = 'I miss you too my shaaylaa 💕🥰';
+            } else if (value >= 90) {
+                message = '😭 NO BECAUSE 90+%?! That\'s honestly so valid! You conquered all 3 levels AND you went that high on the meter! Respect! I miss you too bestie 🫶💀';
+            } else if (value >= 80) {
+                message = '🥹 Okay okay 80%! That\'s actually really sweet! All 3 levels complete and you showed up! Love that for us! 💕✨';
+            } else if (value >= 65) {
+                message = '😏 Not bad, not bad! You passed all 3 challenges and gave me a decent number. I\'ll take it! This was fun 💅';
+            }
+            
+            document.getElementById('stage3').classList.remove('active');
+            document.getElementById('finalStage').classList.add('active');
+            document.getElementById('finalText').textContent = message;
+            
+            // Final celebration
+            createButterflies();
+            setTimeout(createButterflies, 1000);
+        }
+    </script>
+</body>
+</html>
