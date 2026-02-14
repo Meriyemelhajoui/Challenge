@@ -860,33 +860,50 @@
     const confirmBtn = document.getElementById('confirmBtn');
     const characterStatus = document.getElementById('characterStatus');
 
+    // First stage: dramatic warning
     slider.disabled = true;
-    confirmBtn.disabled = true;
-    confirmBtn.textContent = "Analyzing commitment... 🔍";
-    confirmBtn.style.background = "#444";
+    confirmBtn.style.display = "none";
+
+    characterStatus.innerHTML = `
+        <p style="font-size:20px; color:#e91e63; font-weight:bold;">
+        ⚠️ FINAL ANSWER DETECTED
+        </p>
+        <p style="margin-top:10px;">
+        Once locked, your level of missing me cannot be changed.
+        </p>
+        <button id="finalLockBtn" style="
+            margin-top:20px;
+            padding:10px 20px;
+            border:none;
+            border-radius:20px;
+            background:#ff4081;
+            color:white;
+            font-weight:bold;
+            cursor:pointer;">
+            Lock It In 🔐
+        </button>
+    `;
+
+    document.getElementById("finalLockBtn").addEventListener("click", function() {
+        startScan(value);
+    });
+}
+function startScan(value) {
+    const characterStatus = document.getElementById('characterStatus');
 
     characterStatus.innerHTML =
-        '<p style="font-size:20px; color:#e91e63; font-weight:bold;">⚠️ Final answer locked. Processing...</p>';
-
-    setTimeout(() => {
-        characterStatus.innerHTML =
-            '<p style="font-size:18px;">🧠 Running emotional scan...</p>';
-    }, 600);
+        '<p style="font-size:18px;">🧠 Running emotional scan...</p>';
 
     setTimeout(() => {
         characterStatus.innerHTML =
             '<p style="font-size:18px;">💓 Checking heartbeat levels...</p>';
-    }, 1400);
-
-    setTimeout(() => {
-        characterStatus.innerHTML =
-            '<p style="font-size:18px;">📊 Verifying loyalty database...</p>';
-    }, 2200);
+    }, 900);
 
     setTimeout(() => {
         showFinalResult(value);
-    }, 3500);
+    }, 3000);
 }
+
 
 
 
