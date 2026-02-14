@@ -536,18 +536,17 @@
                 Lock it in! 🔒
             </button>
         </div>
+       <!-- Final Stage -->
+<div class="stage" id="finalStage">
+    <div class="celebration">🎉💖🎊</div>
+    <h1 id="finalTitle"></h1> <!-- JS will set this -->
+    <p class="question" id="finalText"></p>
+    <div class="celebration">💕✨🦋✨💕</div>
+    <p style="margin-top: 30px; color: #888; font-size: 16px;">
+        Thanks for playing my lil game 😂💕
+    </p>
+</div>
 
-        <!-- Final Stage -->
-        <div class="stage" id="finalStage">
-            <div class="celebration">🎉💖🎊</div>
-            <h1>🏆 YOU PASSED! 🏆</h1>
-            <p class="question" id="finalText"></p>
-            <div class="celebration">💕✨🦋✨💕</div>
-            <p style="margin-top: 30px; color: #888; font-size: 16px;">
-                Thanks for playing my lil game 😂💕
-            </p>
-        </div>
-    </div>
 
     <script>
         let currentStage = 1;
@@ -934,7 +933,7 @@ function showFinalResult(value) {
     document.getElementById('stage3').classList.remove('active');
     const finalStage = document.getElementById('finalStage');
     finalStage.classList.add('active');
-    finalStage.querySelector('h1').innerHTML = finalTitle;
+    document.getElementById('finalTitle').innerHTML = finalTitle;
     document.getElementById('finalText').innerHTML = message + "<br><br>📸 Screenshot this and send proof.";
 
     document.body.style.background = bg;
