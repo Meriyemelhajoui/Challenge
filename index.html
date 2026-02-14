@@ -860,34 +860,23 @@
     const confirmBtn = document.getElementById('confirmBtn');
     const characterStatus = document.getElementById('characterStatus');
 
-    // First stage: dramatic warning
     slider.disabled = true;
     confirmBtn.style.display = "none";
 
-    characterStatus.innerHTML = `
-        <p style="font-size:20px; color:#e91e63; font-weight:bold;">
-        ⚠️ FINAL ANSWER DETECTED
-        </p>
-        <p style="margin-top:10px;">
-        Once locked, your level of missing me cannot be changed.
-        </p>
-        <button id="finalLockBtn" style="
-            margin-top:20px;
-            padding:10px 20px;
-            border:none;
-            border-radius:20px;
-            background:#ff4081;
-            color:white;
-            font-weight:bold;
-            cursor:pointer;">
-            Lock It In 🔐
-        </button>
-    `;
+    // Directly start scanning (no popup / no extra button)
+    characterStatus.innerHTML =
+        '<p style="font-size:18px;">🧠 Running emotional scan...</p>';
 
-    document.getElementById("finalLockBtn").addEventListener("click", function() {
-        startScan(value);
-    });
+    setTimeout(() => {
+        characterStatus.innerHTML =
+            '<p style="font-size:18px;">💓 Checking heartbeat levels...</p>';
+    }, 900);
+
+    setTimeout(() => {
+        showFinalResult(value);
+    }, 2500);
 }
+
 function startScan(value) {
     const characterStatus = document.getElementById('characterStatus');
 
